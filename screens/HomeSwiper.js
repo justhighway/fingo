@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import SwipeUpDown from "react-native-swipe-up-down";
 import userData from "../data/userData.json";
 import { Shadow } from "react-native-shadow-2";
+import DashedLine from "react-native-dashed-line";
 
 export default function HomeSwiper() {
   const renderCardItems = () => {
@@ -17,6 +18,11 @@ export default function HomeSwiper() {
         <Text style={styles.dateText}>
           {userData.spendingDetail.date[index]}
         </Text>
+        <DashedLine
+          dashLength={3}
+          dashColor="#cccccc"
+          dashStyle={{ borderRadius: 5 }}
+        />
       </View>
     ));
   };
@@ -36,7 +42,7 @@ export default function HomeSwiper() {
         </ScrollView>
       )}
       animation="easeInEaseOut"
-      swipeHeight={400}
+      swipeHeight={350}
       extraMarginTop={50}
       disableSwipeIcon={true}
     />
@@ -44,21 +50,9 @@ export default function HomeSwiper() {
 }
 
 const styles = StyleSheet.create({
-  toggle: {
-    backgroundColor: "pink",
-    borderRadius: 50,
-    height: 10,
-    alignItems: "center",
-    marginHorizontal: 150,
-  },
-  miniPanel: {
-    backgroundColor: "red",
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
-  },
   fullPanel: {
     backgroundColor: "gray",
-    padding: 40,
+    padding: 10,
     borderRadius: 40,
     flex: 1, // 새로 추가된 부분
   },
@@ -66,15 +60,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   objCard: {
-    backgroundColor: "#e0e0e0",
-    borderRadius: 8,
-    padding: 20,
-    marginBottom: 10,
+    padding: 15,
   },
   rowContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: 2,
+    marginBottom: 3,
   },
   placeText: {
     fontSize: 16,
@@ -85,7 +76,7 @@ const styles = StyleSheet.create({
   },
   dateText: {
     fontSize: 16,
-    marginBottom: 8,
+    marginBottom: 20,
     color: "#555",
   },
 });
