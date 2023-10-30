@@ -1,0 +1,15 @@
+export default function CustomDate() {
+  const today = new Date();
+
+  const formattedDate = `${today.getFullYear()}. ${
+    today.getMonth() + 1
+  }. ${today.getDate()} ${getDay()}`;
+
+  function getDay() {
+    const weekday = ["(월)", "(화)", "(수)", "(목)", "(금)", "(토)", "(일)"];
+    const date = weekday[today.getDay()];
+    return date;
+  }
+
+  return formattedDate;
+}
