@@ -1,3 +1,6 @@
+import { Text } from "react-native";
+import React from "react";
+
 export default function CustomDate() {
   const today = new Date();
 
@@ -11,5 +14,5 @@ export default function CustomDate() {
     return date;
   }
 
-  return formattedDate;
+  return <Text style={{ fontSize: 20 }}>{formattedDate}</Text>;
 }
