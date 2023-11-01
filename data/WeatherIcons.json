@@ -1,0 +1,9 @@
+{
+  "Thunderstrom": "weather-lightning",
+  "Drizzle": "weather-rainy",
+  "Rain": "weather-pouring",
+  "Snow": "weather-snowy-heavy",
+  "Mist": "weather-fog",
+  "Clear": "weather-sunny",
+  "Clouds": "weather-cloudy"
+}

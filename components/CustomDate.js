@@ -9,7 +9,7 @@ export default function CustomDate() {
   }. ${today.getDate()} ${getDay()}`;
 
   function getDay() {
-    const weekday = ["(월)", "(화)", "(수)", "(목)", "(금)", "(토)", "(일)"];
+    const weekday = ["(일)", "(월)", "(화)", "(수)", "(목)", "(금)", "(토)"];
     const date = weekday[today.getDay()];
     return date;
   }

@@ -10,9 +10,9 @@
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "날씨 정보를 받아오기 위해 위치 정보를 수집합니다.",
-          "locationAlwaysPermission": "날씨 정보 허가",
-          "locationWhenInUsePermission": "날씨 정보 허가",
+          "locationAlwaysAndWhenInUsePermission": "위치 정보 항상 활성화",
+          "locationAlwaysPermission": "위치 정보 항상 활성화",
+          "locationWhenInUsePermission": "위치 정보 사용할 때만 활성화",
           "isIosBackgroundLocationEnabled": false
         }
       ]
