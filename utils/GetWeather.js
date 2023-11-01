@@ -29,6 +29,7 @@ export default function GetWeather() {
       const json = await response.json();
       const getMain = json.weather[0].main;
       setWeather(getMain);
+      console.log(json);
     })();
   }, []);
 
@@ -38,5 +39,13 @@ export default function GetWeather() {
   } else if (weather) {
     text = weather;
   }
-  return <MaterialCommunityIcons name={WeatherIcons[weather]} size={22} />;
+  console.log(weather);
+
+  return (
+    <MaterialCommunityIcons
+      name={WeatherIcons[weather]}
+      size={22}
+      color={"orange"}
+    />
+  );
 }
