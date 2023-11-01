@@ -3,6 +3,7 @@
 # dependencies
 node_modules/
 data/ALL_API_KEYS.js
+.gitignore
 
 # Expo
 .expo/
