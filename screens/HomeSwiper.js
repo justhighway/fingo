@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Platform } from "react-native";
 import SwipeUpDown from "react-native-swipe-up-down";
 import userData from "../data/userData.json";
 import { Shadow } from "react-native-shadow-2";
@@ -29,6 +29,7 @@ export default function HomeSwiper() {
 
   return (
     <SwipeUpDown
+      style={styles.shadow}
       itemMini={() => (
         <View style={styles.fullPanel}>
           <ScrollView style={styles.fullPanelContent}>
@@ -42,8 +43,8 @@ export default function HomeSwiper() {
         </ScrollView>
       )}
       animation="easeInEaseOut"
-      swipeHeight={350}
-      extraMarginTop={50}
+      swipeHeight={200}
+      extraMarginTop={10}
       disableSwipeIcon={true}
     />
   );
@@ -73,6 +74,22 @@ const styles = StyleSheet.create({
   },
   priceText: {
     fontSize: 16,
+  },
+  shadow: {
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 10,
+          height: "30%",
+        },
+        shadowOpacity: 10,
+        shadowRadius: 10,
+      },
+      android: {
+        elevation: 20,
+      },
+    }),
   },
   dateText: {
     fontSize: 16,

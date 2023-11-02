@@ -13,10 +13,10 @@ const HorizonLine = ({ text }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: "80%",
+    width: "85%",
     alignItems: "center",
     flexDirection: "row",
-    marginVertical: 5,
+    marginVertical: 20,
   },
   line: {
     flex: 1,
@@ -24,9 +24,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#aaa",
   },
   text: {
-    color: "#fff",
-    paddingHorizontal: 10,
-    fontSize: 16,
+    color: "#aaa",
+    paddingHorizontal: 16,
+    fontSize: 14,
   },
 });
 
