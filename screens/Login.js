@@ -8,65 +8,83 @@ import {
   TouchableOpacity,
   Image,
   Platform,
+  ActivityIndicator,
+  Button,
 } from "react-native";
 import Modal from "react-native-modal";
-import DashedLine from "react-native-dashed-line";
-import { FIREBASE_AUTH } from "../FirebaseConfig";
 import HorizonLine from "../utils/HorizonLine";
-import { useWindowDimensions } from "react-native";
+import { FB_AUTH } from "../FirebaseConfig";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 
 export default function Login({ navigation }) {
+  const auth = FB_AUTH;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState("");
   const [errorText, setErrorText] = useState("");
   const [isModalVisible, setModalVisible] = useState(false);
-  const auth = FIREBASE_AUTH;
-  const { height, width } = useWindowDimensions();
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
   const isValidEmail = (email) => {
-    return /\S+@\S+\.\S+/.test(email);
+    const reg =
+      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+    return reg.test(email);
   };
 
   const isValidPassword = (password) => {
-    return password.length >= 8;
+    const reg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
+    return reg.test(password);
   };
 
-  const handleLogin = () => {
-    // 간단한 유효성 검사
-    if (!email.trim() || !password.trim()) {
-      // 메세지 모달 표시
-      setErrorText("이메일과 비밀번호를 입력해주세요.");
-      toggleModal();
-      return;
+  const signIn = async () => {
+    setLoading(true);
+    try {
+      const response = await signInWithEmailAndPassword(auth, email, password);
+      console.log(response);
+      // Home 스크린으로 이동
+      // 여기에 토스트로 로그인 성공! 넣기
+      navigation.reset({
+        index: 0,
+        routes: [{ name: "Home" }],
+      });
+    } catch (error) {
+      console.log(error);
+      if (!email.trim() || !password.trim()) {
+        // 메세지 모달 표시
+        setErrorText("이메일과 비밀번호를 입력해주세요.");
+        toggleModal();
+        return;
+      } else if (!isValidEmail(email) || !isValidPassword(password)) {
+        // 유효하지 않은 이메일 또는 비밀번호 메세지 모달 표시
+        setErrorText("유효한 이메일과 비밀번호를 입력해주세요.");
+        toggleModal();
+        return;
+      }
+    } finally {
+      setLoading(false);
     }
+  };
 
-    if (!isValidEmail(email) || !isValidPassword(password)) {
-      // 유효하지 않은 이메일 또는 비밀번호 메세지 모달 표시
-      setErrorText("유효한 이메일과 비밀번호를 입력해주세요.");
-      toggleModal();
-      return;
+  const signUp = async () => {
+    setLoading(true);
+    try {
+      const response = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
     }
-
-    // 여기서 로그인 로직을 처리하고, 성공 시 아래 코드 실행
-    const userData = {
-      email,
-      password,
-    };
-
-    // JSON 형식으로 저장
-    const jsonUserData = JSON.stringify(userData);
-    console.log("User data:", jsonUserData);
-
-    // Home 스크린으로 이동
-    navigation.reset({
-      index: 0,
-      routes: [{ name: "Home" }],
-    });
   };
 
   useEffect(() => {
@@ -102,7 +120,7 @@ export default function Login({ navigation }) {
           onChangeText={(text) => setPassword(text)}
         />
         <View style={styles.useInfo}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={signUp}>
             <Text style={styles.useInfoText}>회원가입</Text>
           </TouchableOpacity>
           <Text style={styles.useInfoText}> | </Text>
@@ -112,9 +130,14 @@ export default function Login({ navigation }) {
         </View>
         <TouchableOpacity
           style={[styles.button, styles.shadow]}
-          onPress={handleLogin}
+          onPress={signIn}
+          disabled={loading} // 버튼이 로딩 중일 때 비활성화
         >
-          <Text style={styles.buttonText}>Login</Text>
+          {loading ? (
+            <ActivityIndicator />
+          ) : (
+            <Text style={styles.buttonText}>Login</Text>
+          )}
         </TouchableOpacity>
       </View>
 
