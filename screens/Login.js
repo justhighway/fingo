@@ -18,6 +18,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
+import { isValidEmail, isValidPassword } from "../utils/checkValidation";
 
 export default function Login({ navigation }) {
   const auth = FB_AUTH;
@@ -31,16 +32,8 @@ export default function Login({ navigation }) {
     setModalVisible(!isModalVisible);
   };
 
-  const isValidEmail = (email) => {
-    const reg =
-      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-    return reg.test(email);
-  };
-
-  const isValidPassword = (password) => {
-    const reg = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
-    return reg.test(password);
-  };
+  isValidEmail(email);
+  isValidPassword(password);
 
   const signIn = async () => {
     setLoading(true);
@@ -72,19 +65,7 @@ export default function Login({ navigation }) {
   };
 
   const signUp = async () => {
-    setLoading(true);
-    try {
-      const response = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
+    navigation.navigate("SignUpStack");
   };
 
   useEffect(() => {

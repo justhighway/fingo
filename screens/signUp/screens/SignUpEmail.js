@@ -3,8 +3,11 @@
 import React, { useState } from "react";
 import { View, TextInput, Button, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { checkDuplicateEmail } from "../vm/emailValidation";
-import { handleEmailInput } from "../vm/getData";
+import {
+  checkDuplicateEmail,
+  isValidEmail,
+} from "../../../utils/checkValidation";
+import { handleEmailInput } from "../vm/GetData";
 
 const SignUpEmail = () => {
   const navigation = useNavigation();
@@ -20,6 +23,8 @@ const SignUpEmail = () => {
 
     if (isDuplicate) {
       setEmailError("중복된 이메일입니다.");
+    } else if (!isValidEmail(inputEmail)) {
+      setEmailError("유효하지 않은 이메일 형식입니다.");
     } else {
       handleEmailInput(inputEmail);
     }

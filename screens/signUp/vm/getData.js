@@ -8,10 +8,6 @@ const handleEmailInput = (email) => {
   userData.email = email;
 };
 
-const handlePasswordInput = (password) => {
-  // 비밀번호는 저장하지 않음
-};
-
 const handlePhoneInput = (phone) => {
   userData.phone = phone;
 };
@@ -33,7 +29,6 @@ const saveUserDataToFirestore = async () => {
 
 export {
   handleEmailInput,
-  handlePasswordInput,
   handlePhoneInput,
   handleNameAndTermInput,
   saveUserDataToFirestore,
