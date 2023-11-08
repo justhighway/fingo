@@ -1,5 +1,3 @@
-// signUp/screens/SignUpEmail.js
-
 import React, { useState } from "react";
 import { View, TextInput, Button, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
@@ -9,7 +7,7 @@ import {
 } from "../../../utils/checkValidation";
 import { handleEmailInput } from "../vm/GetData";
 
-const SignUpEmail = () => {
+export default function SignUpEmail() {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -48,6 +46,4 @@ const SignUpEmail = () => {
       <Button title="다음으로" onPress={goToNextScreen} />
     </View>
   );
-};
-
-export default SignUpEmail;
+}

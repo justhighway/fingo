@@ -65,7 +65,10 @@ export default function Login({ navigation }) {
   };
 
   const signUp = async () => {
-    navigation.navigate("SignUpStack");
+    navigation.navigate({
+      index: 1,
+      routes: [{ name: "SignUpEmail" }],
+    });
   };
 
   useEffect(() => {
