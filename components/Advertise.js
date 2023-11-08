@@ -1,12 +1,14 @@
-import { View, Text } from "react-native";
+import { View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
 
-const Advertise = () => {
-  return (
-    <View>
-      <Text>Advertise</Text>
-    </View>
-  );
-};
+export default function Advertise() {
+  return <Image source={require("../assets/banner.png")} style={styles.size} />;
+}
 
-export default Advertise;
+const styles = StyleSheet.create({
+  size: {
+    height: "33%",
+    width: 350,
+    borderRadius: 20,
+  },
+});

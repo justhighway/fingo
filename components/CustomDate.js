@@ -14,5 +14,7 @@ export default function CustomDate() {
     return date;
   }
 
-  return <Text style={{ fontSize: 20 }}>{formattedDate}</Text>;
+  return (
+    <Text style={{ fontSize: 20, fontWeight: "bold" }}>{formattedDate} · </Text>
+  );
 }
